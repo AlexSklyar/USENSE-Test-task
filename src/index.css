@@ -1,0 +1,25 @@
+.password-strength{
+  display: flex;
+  justify-content: center;
+}
+
+
+.password-strength__block {
+  height: 10px;
+  width: 20px;
+  margin: 15px;
+  border-radius: 5px;
+  background-color: #d3d3d3; /* gray */
+}
+
+.password-strength__block--weak {
+  background-color: #ff5252; /* red */
+}
+
+.password-strength__block--medium {
+  background-color: #ffcc29; /* yellow */
+}
+
+.password-strength__block--strong {
+  background-color: #66bb6a; /* green */
+}
