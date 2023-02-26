@@ -1,3 +1,6 @@
+.container{
+  text-align: center;
+}
 .password-strength{
   display: flex;
   justify-content: center;
