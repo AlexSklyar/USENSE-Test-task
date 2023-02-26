@@ -27,10 +27,11 @@ function PasswordStrength() {
     }
   }
 
-  return (
+   return (
+    <div className="container">
+    <label htmlFor="password">Password:</label>
+    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
     <div className="password-strength">
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" value={password} onChange={handlePasswordChange} />
       <div className={'password-strength__block'} 
 
       style={
@@ -60,6 +61,7 @@ function PasswordStrength() {
         calculatePasswordStrength() === 'less'?
         styles.less : styles.none
         }></div>
+    </div>
     </div>
   );
 }
