@@ -1,4 +1,4 @@
-import PasswordStrength from './PasswordStrength';
+import PasswordStrength from "./PasswordStrength";
 
 function App() {
   return (

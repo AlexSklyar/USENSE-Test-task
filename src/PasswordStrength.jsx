@@ -1,67 +1,46 @@
-import React, { useState } from 'react';
-
-
-const styles = {
-  less: {backgroundColor: "red"},
-  weak: {backgroundColor: "red"},
-  medium: {backgroundColor: "yellow"},
-  strong: {backgroundColor: "green"},
-}
+import React, { useState } from "react";
+import PasswordBlocks from "./PasswordBlocks";
 
 function PasswordStrength() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
+
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    event.preventDefault();
+    setPassword(event.target.value.trim());
   }
+
   function calculatePasswordStrength() {
     if (password.length === 0) {
-      return 'none';
+      return "none";
     } else if (password.length < 8) {
-      return 'less';
-    } else if (password.length >= 8 && /^[a-zA-Z]+$/.test(password) || /^\d+$/.test(password) || /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password)) {
-      return 'weak';
-    } else if (password.length >= 8 && /^[a-zA-Z0-9]+$/.test(password) || /^[a-zA-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password) || /^\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password)) {
-      return 'medium';
-    } else{
-      return 'strong';
+      return "less";
+    } else if (
+      (password.length >= 8 && /^[a-zA-Z]+$/.test(password)) ||
+      /^\d+$/.test(password) ||
+      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password)
+    ) {
+      return "weak";
+    } else if (
+      (password.length >= 8 && /^[a-zA-Z0-9]+$/.test(password)) ||
+      /^[a-zA-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password) ||
+      /^[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/.test(password)
+    ) {
+      return "medium";
+    } else {
+      return "strong";
     }
   }
 
-   return (
+  return (
     <div className="container">
-    <label htmlFor="password">Password:</label>
-    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-    <div className="password-strength">
-      <div className={'password-strength__block'} 
-
-      style={
-        calculatePasswordStrength() === 'weak'?
-        styles.weak : 
-        calculatePasswordStrength() === 'medium'? 
-        styles.medium  : 
-        calculatePasswordStrength() === 'strong'? 
-        styles.strong  : 
-        calculatePasswordStrength() === 'less'?
-        styles.less : styles.none
-        }></div>
-
-      <div className={'password-strength__block'} 
-      style={
-        calculatePasswordStrength() === 'medium'? 
-        styles.medium  : 
-        calculatePasswordStrength() === 'strong'? 
-        styles.strong  : 
-        calculatePasswordStrength() === 'less'?
-        styles.less : styles.none
-        }></div>
-
-      <div className={'password-strength__block'} style={
-        calculatePasswordStrength() === 'strong'? 
-        styles.strong  : 
-        calculatePasswordStrength() === 'less'?
-        styles.less : styles.none
-        }></div>
-    </div>
+      <label htmlFor="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+      <PasswordBlocks calculatePasswordStrength={calculatePasswordStrength} />
     </div>
   );
 }
